@@ -8,7 +8,7 @@ module.exports = function(angel) {
     options = angel.cloneDNA(options)
 
     fs.readFile(options.cwd+"/package.json", function(err, data){
-
+      if(err) return next(err)
       var p = JSON.parse(data)
       var newVersion = p.version.split(".");
       newVersion[2] = (parseInt(newVersion[2])+1).toString();
