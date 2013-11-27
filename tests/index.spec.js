@@ -25,7 +25,7 @@ describe("angelscripts", function(){
     var instance = new Angel()
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("release master to origin "+__dirname+"/data dry", function(err, result){
+        instance.do("git-release master to origin "+__dirname+"/data dry", function(err, result){
           expect(err).toBe(null)
           var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
           expect(packageData.version).toBe("0.0.1")
@@ -40,7 +40,7 @@ describe("angelscripts", function(){
     var instance = new Angel()
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("release develop to origin at master "+__dirname+"/data dry", function(err, result){
+        instance.do("git-release develop to origin at master "+__dirname+"/data dry", function(err, result){
           expect(err).toBe(null)
           var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
           expect(packageData.version).toBe("0.0.1")
@@ -55,7 +55,7 @@ describe("angelscripts", function(){
     var instance = new Angel({dryrun: true})
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("release master to origin "+__dirname+"/data", function(err, result){
+        instance.do("git-release master to origin "+__dirname+"/data", function(err, result){
           expect(err).toBe(null)
           var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
           expect(packageData.version).toBe("0.0.1")
@@ -71,7 +71,7 @@ describe("angelscripts", function(){
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
         process.chdir(__dirname+"/data")
-        instance.do("release master to origin", function(err, result){
+        instance.do("git-release master to origin", function(err, result){
           expect(err).toBe(null)
           var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
           expect(packageData.version).toBe("0.0.1")

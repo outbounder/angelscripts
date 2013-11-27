@@ -2,7 +2,7 @@ var exec = require("shellreactions-exec")
 var fs = require('fs')
 
 module.exports = function(angel) {
-  angel.on("release :target to :remote :cwd? :dryrun?", function(options, next){
+  angel.on("git-release :target to :remote :cwd? :dryrun?", function(options, next){
     if(!options.cwd)
       options.cwd = process.cwd()
     options = angel.cloneDNA(options)
@@ -29,7 +29,7 @@ module.exports = function(angel) {
       
   })
 
-  angel.on("release :base to :remote at :target :cwd? :dryrun?", function(options, next){
+  angel.on("git-release :base to :remote at :target :cwd? :dryrun?", function(options, next){
     if(!options.cwd)
       options.cwd = process.cwd()
     options = angel.cloneDNA(options)
@@ -41,7 +41,7 @@ module.exports = function(angel) {
       "git merge #{base}"
     ], options, function(err, result){
       if(err) return next(err)
-      angel.do("release #{target} to #{remote} #{cwd} #{dryrun}", options, next)
+      angel.do("git-release #{target} to #{remote} #{cwd} #{dryrun}", options, next)
     })
   })
 }
