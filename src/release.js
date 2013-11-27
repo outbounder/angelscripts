@@ -26,7 +26,7 @@ module.exports = function(angel) {
         if(err) return next(err)
         exec([
           "git add package.json",
-          "git commit -am '#{newVersion} release'",
+          "git commit -m '#{newVersion} release'",
           "git push #{remote} #{target}"
         ], options, next)
       })
@@ -46,7 +46,10 @@ module.exports = function(angel) {
       "git merge #{base}"
     ], options, function(err, result){
       if(err) return next(err)
-      angel.do("git-release #{target} to #{remote} #{cwd} #{dryrun}", options, next)
+      angel.do("git-release #{target} to #{remote} #{cwd} #{dryrun}", options, function(err){
+        if(err) return next(err)
+        exec("git checkout #{base}", options, next)
+      })
     })
   })
 }
