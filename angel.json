@@ -1,0 +1,6 @@
+{
+  "skipStartupInstall": true,
+  "scripts": [
+    "$src/release"
+  ]
+}
