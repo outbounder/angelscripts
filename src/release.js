@@ -3,7 +3,8 @@ var fs = require('fs')
 
 module.exports = function(angel) {
   angel.on("git-release", function(options, next){
-    angel.do("git-release #{target} to #{remote}", next)
+    options = angel.cloneDNA(options)
+    angel.do("git-release #{target} to #{remote}", options, next)
   })
 
   angel.on("git-release :target to :remote :cwd? :dryrun?", function(options, next){
