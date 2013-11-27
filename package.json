@@ -1,0 +1,17 @@
+{
+  "name": "angelscripts",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "jasmine-node ./tests/"
+  },
+  "dependencies": {
+    "shellreactions-exec": "*",
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "jasmine-node": "latest",
+    "organic-angel": "*"
+  },
+  "license": "MIT"
+}
