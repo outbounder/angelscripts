@@ -2,5 +2,7 @@
   "skipStartupInstall": true,
   "scripts": [
     "$src/release"
-  ]
+  ],
+  "target": "master",
+  "remote": "origin"
 }
