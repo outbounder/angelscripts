@@ -2,6 +2,10 @@ var exec = require("shellreactions-exec")
 var fs = require('fs')
 
 module.exports = function(angel) {
+  angel.on("git-release", function(options, next){
+    angel.do("git-release #{target} to #{remote}", next)
+  })
+
   angel.on("git-release :target to :remote :cwd? :dryrun?", function(options, next){
     if(!options.cwd)
       options.cwd = process.cwd()
