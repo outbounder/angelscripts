@@ -1,8 +1,8 @@
 {
   "skipStartupInstall": true,
   "scripts": [
-    "$src/emit",
-    "$src/git-release"
+    "./src/emit",
+    "./src/git-release"
   ],
   "defaults": {
     "target": "master",
