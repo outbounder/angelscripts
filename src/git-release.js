@@ -12,6 +12,8 @@ var incrementPackageJSONVersion = function(options, next){
     
     p.version = newVersion
     options.cmdData.newVersion = newVersion
+    if(options.verbose)
+      console.info(p)
 
     fs.writeFile(process.cwd()+"/package.json", JSON.stringify(p, null, 2), function(err){
       if(err) return next(err)
@@ -23,7 +25,7 @@ var incrementPackageJSONVersion = function(options, next){
 module.exports = function(angel) {
 
   angel.on("git-release", function(options, next){
-    options = angel.cloneDNA(options)
+    options = angel.defaults(options)
     angel.do("git-release {target} to {remote}", options, next)
   })
 
@@ -36,7 +38,7 @@ module.exports = function(angel) {
         "git push {remote} {target}"
       ])
     ])
-    run({ cmdData: angel.cloneDNA(options) }, next)
+    run({ cmdData: angel.defaults(options) }, next)
   })
 
   angel.on("git-release :base to :remote at :target", function(options, next){
@@ -51,6 +53,6 @@ module.exports = function(angel) {
       angel.react("git-release {target} to {remote}", "cmdData"),
       exec("git checkout {base}")
     ])
-    run({ cmdData: angel.cloneDNA(options) }, next)
+    run({ cmdData: angel.defaults(options) }, next)
   })
 }

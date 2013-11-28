@@ -4,6 +4,8 @@
     "$src/emit",
     "$src/git-release"
   ],
-  "target": "master",
-  "remote": "origin"
+  "defaults": {
+    "target": "master",
+    "remote": "origin"
+  }
 }
