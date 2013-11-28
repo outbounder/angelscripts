@@ -1,7 +1,8 @@
 {
   "skipStartupInstall": true,
   "scripts": [
-    "$src/release"
+    "$src/emit",
+    "$src/git-release"
   ],
   "target": "master",
   "remote": "origin"

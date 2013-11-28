@@ -1,4 +1,4 @@
-var series = require("reactions").fn.series
+var series = require("reactions").make.series
 var exec = require("shellreactions-exec").exec
 var fs = require('fs')
 
