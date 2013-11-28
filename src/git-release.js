@@ -11,8 +11,8 @@ var incrementPackageJSONVersion = function(options, next){
     newVersion = newVersion.join(".")
     
     p.version = newVersion
-    options.newVersion = newVersion
-    
+    options.cmdData.newVersion = newVersion
+
     fs.writeFile(process.cwd()+"/package.json", JSON.stringify(p, null, 2), function(err){
       if(err) return next(err)
       next(null, p)
