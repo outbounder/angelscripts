@@ -1,13 +1,14 @@
 {
   "name": "angelscripts",
-  "version": "0.0.8",
+  "version": "0.0.1",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
   },
   "dependencies": {
-    "shellreactions-exec": "*",
-    "underscore": "*"
+    "shellreactions-exec": "0.0.1",
+    "reactions": "0.0.8",
+    "underscore": "1.5.2"
   },
   "devDependencies": {
     "jasmine-node": "latest",

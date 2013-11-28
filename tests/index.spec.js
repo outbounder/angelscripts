@@ -3,6 +3,7 @@ var fs = require('fs')
 describe("angelscripts", function(){
 
   var Angel = require("organic-angel")
+  process.chdir(__dirname+"/data")
   
   it("does emit", function(next){
     var instance = new Angel()
@@ -21,15 +22,13 @@ describe("angelscripts", function(){
     })
   })
 
-  it("does release in dryrun", function(next){
-    var instance = new Angel()
+  it("does release", function(next){
+    var instance = new Angel({test: []})
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("git-release master to origin "+__dirname+"/data dry", function(err, result){
+        instance.do("git-release master to origin", function(err, result){
           expect(err).toBe(null)
-          var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
-          expect(packageData.version).toBe("0.0.1")
-          fs.writeFileSync(__dirname+"/data/package.json",JSON.stringify({version: "0.0.0"}, null, 2))
+          console.log(instance.dna.test)
           next()
         })
       })
@@ -37,45 +36,12 @@ describe("angelscripts", function(){
   })
 
   it("does release from one branch to another with remote in dryrun", function(next){
-    var instance = new Angel()
+    var instance = new Angel({test: []})
     instance.plasma.on("ready", function(){
       instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("git-release develop to origin at master "+__dirname+"/data dry", function(err, result){
+        instance.do("git-release develop to origin at master", function(err, result){
           expect(err).toBe(null)
-          var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
-          expect(packageData.version).toBe("0.0.1")
-          fs.writeFileSync(__dirname+"/data/package.json",JSON.stringify({version: "0.0.0"}, null, 2))
-          next()
-        })
-      })
-    })
-  })
-
-  it("does release with setting dryrun outside", function(next){
-    var instance = new Angel({dryrun: true})
-    instance.plasma.on("ready", function(){
-      instance.loadScripts([__dirname+"/../src/release"], function(){
-        instance.do("git-release master to origin "+__dirname+"/data", function(err, result){
-          expect(err).toBe(null)
-          var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
-          expect(packageData.version).toBe("0.0.1")
-          fs.writeFileSync(__dirname+"/data/package.json",JSON.stringify({version: "0.0.0"}, null, 2))
-          next()
-        })
-      })
-    })
-  })
-
-  it("does dryrun release without implicit cwd", function(next){
-    var instance = new Angel({dryrun: true})
-    instance.plasma.on("ready", function(){
-      instance.loadScripts([__dirname+"/../src/release"], function(){
-        process.chdir(__dirname+"/data")
-        instance.do("git-release master to origin", function(err, result){
-          expect(err).toBe(null)
-          var packageData = JSON.parse(fs.readFileSync(__dirname+"/data/package.json"))
-          expect(packageData.version).toBe("0.0.1")
-          fs.writeFileSync(__dirname+"/data/package.json",JSON.stringify({version: "0.0.0"}, null, 2))
+          console.log(instance.dna.test)
           next()
         })
       })
