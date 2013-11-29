@@ -1,5 +1,4 @@
 {
-  "skipStartupInstall": true,
   "scripts": [
     "./src/emit",
     "./src/git-release"

@@ -54,7 +54,6 @@ describe("angelscripts git-release", function(){
     instance.do("git-release", function(err, result){
       expect(err).toBeFalsy()
       expect(result).toBeDefined()
-      console.log(result)
       next()
     })
   })
@@ -66,7 +65,6 @@ describe("angelscripts git-release", function(){
     instance.do("git-release master to origin at production", function(err, result){
       expect(err).toBeFalsy()
       expect(result).toBeDefined()
-      console.log(result)
       next()
     })  
   })
