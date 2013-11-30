@@ -1,8 +1,6 @@
-var series = require("reactions").make.collectSeries
-var exec = require("shellreactions-exec").exec
 var fs = require('fs')
 
-var incrementPackageJSONVersion = function(options, next){
+var incrementPackageJSONVersion = function(angel, next){
   fs.readFile(process.cwd()+"/package.json", function(err, data){
     if(err) return next(err)
     var p = JSON.parse(data)
@@ -11,9 +9,11 @@ var incrementPackageJSONVersion = function(options, next){
     newVersion = newVersion.join(".")
     
     p.version = newVersion
-    options.cmdData.newVersion = newVersion
-    if(options.verbose)
-      console.info(p)
+    angel.cmdData.newVersion = newVersion
+    if(angel.report)
+      angel.report(this, p)
+    if(angel.dontExecute)
+      return next(null, false)
 
     fs.writeFile(process.cwd()+"/package.json", JSON.stringify(p, null, 2), function(err){
       if(err) return next(err)
@@ -24,35 +24,33 @@ var incrementPackageJSONVersion = function(options, next){
 
 module.exports = function(angel) {
 
-  angel.on("git-release", function(options, next){
-    options = angel.defaults(options)
-    angel.do("git-release {target} to {remote}", options, next)
+  require("angelabilities/src/reactions")(angel)
+  require("angelabilities/src/shell")(angel)
+
+  angel.on("git-release", function(angel, next){
+    angel.cmdData.target = angel.dna.defaults.target
+    angel.cmdData.remote = angel.dna.defaults.remote
+    angel.do("git-release {target} to {remote}", next)
   })
 
-  angel.on("git-release :target to :remote", function(options, next){
-    var run = series([
-      incrementPackageJSONVersion,
-      exec([
-        "git add package.json",
-        "git commit -m '{newVersion} release'",
-        "git push {remote} {target}"
-      ])
+  angel.on("git-release :target to :remote", angel.series([
+    incrementPackageJSONVersion,
+    angel.exec([
+      "git add package.json",
+      "git commit -m '{newVersion} release'",
+      "git push {remote} {target}"
     ])
-    run({ cmdData: angel.defaults(options) }, next)
-  })
+  ]))
 
-  angel.on("git-release :base to :remote at :target", function(options, next){
-    var run = series([
-      exec([
-        "git checkout {base}",
-        "git pull --ff {remote} {base}",
-        "git checkout {target}",
-        "git pull --ff {remote} {target}",
-        "git merge {base}"
-      ]),
-      angel.react("git-release {target} to {remote}", "cmdData"),
-      exec("git checkout {base}")
-    ])
-    run({ cmdData: angel.defaults(options) }, next)
-  })
+  angel.on("git-release :base to :remote at :target", angel.series([
+    angel.exec([
+      "git checkout {base}",
+      "git pull --ff {remote} {base}",
+      "git checkout {target}",
+      "git pull --ff {remote} {target}",
+      "git merge {base}"
+    ]),
+    angel.do("git-release {target} to {remote}"),
+    angel.exec("git checkout {base}")
+  ]))
 }
