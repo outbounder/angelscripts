@@ -44,5 +44,8 @@ https://github.com/outbounder/angelabilities
 ## organic-angel
 https://github.com/outbounder/organic-angel
 
+## cli-table
+http://github.com/guille
+
 ## jasmine-node
 https://github.com/mhevery/jasmine-node
