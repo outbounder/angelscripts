@@ -1,13 +1,13 @@
 {
   "name": "angelscripts",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "main": "index.js",
   "scripts": {
     "test": "jasmine-node ./tests/"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/outbounder/angelscripts.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/outbounder/angelscripts.git"
   },
   "dependencies": {
     "underscore": "1.5.2",
@@ -15,7 +15,8 @@
   },
   "devDependencies": {
     "jasmine-node": "1.11.0",
-    "organic-angel": "0.2.2"
+    "organic-angel": "0.2.3",
+    "shellreactions-exec": "0.0.3"
   },
   "license": "MIT"
 }
