@@ -1,5 +1,16 @@
 # angelscripts
 
+## help
+List all angel commands currently attached
+
+    $ angel help
+      -> iterates all angel.reactor handlers
+      -> extracts sensible help and returns it as table result
+
+    $ angel help :command
+      -> finds all commands matching 
+      -> extracts sensible help descriptions and returns them as json
+
 ## git-release
 Handy automation of simple day-to-day commands for incremental git release
 
@@ -24,17 +35,14 @@ Construct chemical from command line and emit into angel's plasma
 
 # Thanks to
 
-## organic-angel
-https://github.com/outbounder/organic-angel
-
-## shellreactions-exec
-https://github.com/outbounder/shellreactions-exec
-
-## reactions
-https://github.com/vbogdanov/reactions
-
 ## underscore 
 http://underscorejs.org
+
+## angelabilities
+https://github.com/outbounder/angelabilities
+
+## organic-angel
+https://github.com/outbounder/organic-angel
 
 ## jasmine-node
 https://github.com/mhevery/jasmine-node

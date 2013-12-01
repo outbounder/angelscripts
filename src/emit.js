@@ -26,4 +26,6 @@ module.exports = function(angel) {
       next(null, r)
     })
   })
+  .example("$ angel emit -type test -property value -property2 value")
+  .description("constructs and emits in angel's plasma a chemical from command line")
 }
