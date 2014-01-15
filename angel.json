@@ -1,8 +1,8 @@
 {
   "scripts": [
-    "./src/emit",
-    "./src/git-release",
-    "./src/help"
+    "./src/emit.js",
+    "./src/git-release.js",
+    "./src/help.js"
   ],
   "defaults": {
     "target": "master",

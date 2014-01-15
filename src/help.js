@@ -18,6 +18,20 @@ module.exports = function(angel){
   .example("$ angel help")
   .description("brings short hand help with examples")
 
+  angel.on("help.json", function(angel, next){
+    var $handlers = angel.reactor.$handlers
+    var table = []
+    for(var i = 0; i<$handlers.length; i++) {
+      var helpText = {}
+      var originalPattern = $handlers[i].originalPattern
+      helpText[originalPattern] = $handlers[i].example || "example missing"
+      table.push(helpText)
+    }
+    next(null, table)
+  })
+  .example("$ angel help.json")
+  .description("brings short hand help with examples in json")
+
   angel.on(/help (.*)$/, function(angel, next){
     var $handlers = angel.reactor.$handlers
     var found_descriptions = []
